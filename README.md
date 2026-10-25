@@ -242,7 +242,10 @@ Then open a pull request and describe the improvement clearly.
 
 ## 📞 Contact
 
-For project questions, collaboration, or production deployment support, reach out through the repository owner or maintainer on GitHub.
+I am **open to new opportunities**, freelance projects, and collaboration. Feel free to reach out via:
+
+* **Email:** [temirulanx@gmail.com](mailto:email@temirulanx.com)
+* **Telegram:** [@timatym1](https://t.me/timatym1)
 
 ---
 
