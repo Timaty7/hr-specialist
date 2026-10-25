@@ -1,44 +1,66 @@
 # HR Specialist
 
-A Telegram-based HR and recruitment automation platform built with Python and AIogram. The project is designed to streamline hiring workflows: collecting candidate applications, publishing vacancies, matching candidates with jobs, scheduling interviews, managing subscriptions, and syncing data to Google Sheets.
+<div align="center">
 
-## Overview
+![HR Specialist Banner](https://img.shields.io/badge/Telegram-HR%20Automation-2CA5E0?logo=telegram&logoColor=white)
 
-HR Specialist is a full-featured bot that helps both job seekers and employers interact through Telegram. Candidates can submit resumes, employers can post vacancies, the bot matches relevant profiles, and administrators can monitor performance and manage premium access.
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![AIogram 3.x](https://img.shields.io/badge/AIogram-3.x-2CA5E0?logo=telegram&logoColor=white)](https://docs.aiogram.dev/)
+[![PostgreSQL 15](https://img.shields.io/badge/PostgreSQL-15-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Redis 7](https://img.shields.io/badge/Redis-7-DC382D?logo=redis&logoColor=white)](https://redis.io/)
+[![Docker Compose](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/compose/)
+[![Google Sheets](https://img.shields.io/badge/Google-Sheets-34A853?logo=google-sheets&logoColor=white)](https://www.google.com/sheets/about/)
 
-The project combines:
+# HR Specialist Bot
 
-- Telegram bot interface with AIogram
-- PostgreSQL for structured data storage
-- Redis for FSM/session state management
-- Google Sheets for reporting and synchronization
-- APScheduler for background tasks
-- Docker Compose for local environment orchestration
+Smart recruitment automation for Telegram — built to streamline hiring, talent discovery, candidate matching, interviews, and admin management from one place.
 
-## Key Features
+</div>
 
-- Candidate application flow with structured resume form
-- Employer vacancy management and posting
-- Smart matching between profiles and job openings
-- Interview coordination and workflow support
-- Creator/admin control panel with system statistics
-- Premium subscription and referral balance logic
-- Google Sheets sync for applicants, vacancies, and interviews
-- Dockerized setup for quick deployment
+## ✨ Overview
 
-## Tech Stack
+HR Specialist is a Telegram-based HR and recruitment bot built with Python and AIogram. It allows candidates to submit job applications, employers to publish vacancies, relevant profiles to be matched automatically, interview workflows to be organized, and admins to manage the platform with a creator dashboard.
 
-- Python 3.11+
-- AIogram 3.x
-- SQLAlchemy 2.x
-- PostgreSQL
-- Redis
-- Google Sheets API
-- APScheduler
-- Pydantic Settings
-- Docker / Docker Compose
+The platform combines:
 
-## Project Structure
+- Telegram-first user experience
+- PostgreSQL-powered data persistence
+- Redis-based FSM and session storage
+- Google Sheets synchronization for reporting
+- Scheduled background jobs with APScheduler
+- Dockerized deployment for fast start-up
+
+## 🚀 Why this project matters
+
+Recruitment processes often break down because of fragmented communication, manual candidate filtering, and slow administrative workflows. HR Specialist centralizes the experience inside Telegram, where users already spend time, making hiring faster, more accessible, and operationally efficient.
+
+## 🌟 Core features
+
+- Candidate resume submission with structured onboarding
+- Employer vacancy posting and management
+- Automated candidate-vacancy matching engine
+- Interview scheduling and tracking workflows
+- Creator/admin panel for analytics and moderation
+- Premium subscription and referral balance features
+- Google Sheets integration for real-time data capture
+- Containerized setup for local and deployment environments
+
+## 🧩 Architecture
+
+```mermaid
+flowchart LR
+    A[Telegram User] --> B[AIogram Bot]
+    B --> C[Handlers]
+    C --> D[Database Models]
+    C --> E[Matching Engine]
+    C --> F[Google Sheets Service]
+    B --> G[Redis FSM Storage]
+    B --> H[Scheduler Jobs]
+    D --> I[(PostgreSQL)]
+    G --> J[(Redis)]
+```
+
+## 📁 Project structure
 
 ```text
 hr-specialist/
@@ -47,6 +69,7 @@ hr-specialist/
 ├── docker-compose.yml
 ├── main.py
 ├── requirements.txt
+├── README.md
 ├── config/
 │   └── settings.py
 ├── database/
@@ -69,23 +92,67 @@ hr-specialist/
 │   ├── google-sheets.py
 │   ├── matching.py
 │   └── scheduler.py
-└── README.md
+└── __pycache__/
 ```
 
-## Architecture
+## 🏗️ Tech stack
 
-The application follows a modular Telegram bot architecture:
+- Python 3.11+
+- AIogram 3.x
+- SQLAlchemy 2.x
+- PostgreSQL 15
+- Redis 7
+- Google Sheets API
+- APScheduler
+- Pydantic Settings
+- Docker / Docker Compose
 
-- `main.py` starts the bot and registers routers
-- `handlers/` contains all command and callback handlers
-- `database/` defines SQLAlchemy models and session configuration
-- `services/` includes Google Sheets integration, matching logic, and scheduler
-- `config/settings.py` loads environment variables from `.env`
-- `docker-compose.yml` orchestrates PostgreSQL, Redis, and the bot container
+## 🧪 Demo and preview
 
-## Environment Variables
+<div align="center">
 
-Create a `.env` file in the project root with the following values:
+![HR Specialist Demo](https://via.placeholder.com/1200x700/0F172A/FFFFFF?text=HR+Specialist+Telegram+Bot+Demo)
+
+</div>
+
+### Demo flow
+
+1. User starts the Telegram bot
+2. Candidate completes a structured resume form
+3. Employer posts a vacancy
+4. Matching service suggests relevant people
+5. Interview process is coordinated inside Telegram
+6. Creator/admin inspects analytics and manages premium access
+
+> Replace the placeholder image with actual screenshots from your production/demo environment to showcase the UI and flows.
+
+## ⚙️ Installation
+
+### 1) Clone the repository
+
+```bash
+git clone https://github.com/Timaty7/hr-specialist.git
+cd hr-specialist
+```
+
+### 2) Create a virtual environment
+
+```bash
+python -m venv venv
+source venv/bin/activate
+# Windows:
+# venv\Scripts\activate
+```
+
+### 3) Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4) Configure environment variables
+
+Create a `.env` file in the project root:
 
 ```env
 BOT_TOKEN=your_telegram_bot_token
@@ -95,123 +162,75 @@ GOOGLE_SHEET_ID=your_google_sheet_id
 CREATOR_ID=your_telegram_user_id
 ```
 
-Notes:
+## 🐳 Run with Docker
 
-- `BOT_TOKEN` must be issued from Telegram BotFather.
-- `CREATOR_ID` is used for admin/creator-only access control.
-- `GOOGLE_SHEET_ID` links the project to the Google spreadsheet used for sync.
-- Never commit real secrets to version control; keep them in local `.env` files or your deployment secret manager.
-
-## Installation
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/Timaty7/hr-specialist.git
-cd hr-specialist
-```
-
-### 2. Create a virtual environment
-
-```bash
-python -m venv venv
-source venv/bin/activate   # Linux/macOS
-# or
-venv\Scripts\activate      # Windows
-```
-
-### 3. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Configure environment
-
-Copy the sample values into `.env` and replace placeholders with your actual values.
-
-## Running with Docker
-
-This project includes `docker-compose.yml` to run PostgreSQL and Redis together with the bot service.
+This project includes a full Docker Compose configuration for PostgreSQL and Redis.
 
 ```bash
 docker compose up --build
 ```
 
-This will start:
+This starts:
 
 - PostgreSQL database
-- Redis cache/FSM state storage
+- Redis cache/FSM storage
 - Telegram bot service
 
-To stop the services:
+To stop services:
 
 ```bash
 docker compose down
 ```
 
-## Local Execution
+## ▶️ Run locally
 
-If you want to run the application directly without Docker:
+If your services are already running, you can start the bot directly:
 
 ```bash
 python main.py
 ```
 
-Make sure PostgreSQL and Redis are running and the environment variables are valid.
+## 🗄️ Data model
 
-## Database Model
+The application uses SQLAlchemy models for the core recruitment flow:
 
-The project uses SQLAlchemy models for:
+- `User` — role, subscription state, balance, referrals
+- `Resume` — candidate profile and application data
+- `Vacancy` — employer job postings
+- `WithdrawalRequest` — payout and status tracking
 
-- `User` — user profiles, roles, subscription state, referral data
-- `Resume` — candidate resumes and application details
-- `Vacancy` — employer job posts
-- `WithdrawalRequest` — payout requests and statuses
+## 🤖 Bot workflow
 
-## Bot Workflow
+Typical user journey:
 
-Typical user flow:
+1. Open the bot from Telegram
+2. Select a role: candidate or employer
+3. Complete the application or vacancy form
+4. Receive candidate/vacancy matches automatically
+5. Start interview coordination
+6. Track platform analytics as admin
 
-1. User opens the Telegram bot.
-2. User selects a role: candidate or employer.
-3. Candidate fills out an application / resume form.
-4. Employer posts a vacancy.
-5. Matching service identifies relevant candidates.
-6. Qualified matches receive interview invitations.
-7. Admin can inspect stats and manage the platform.
+## 📊 Admin and creator commands
 
-## Google Sheets Integration
+The admin panel supports the following commands:
 
-The service layer synchronizes data to a Google Sheet with worksheets such as:
+- `/admin` — display the creator dashboard
+- `/stats` — view total users, resumes, vacancies, and subscription counts
+- `/give_sub <user_tg_id>` — grant premium access for 30 days
+- `/add_balance <user_tg_id> <amount>` — top up referral balance
+- `/ban <user_tg_id>` — restrict user access
+- `/broadcast <message>` — send a message to all users
 
-- Applicants
-- Vacancies
-- Interviews
+## 🔒 Security notes
 
-This supports reporting, candidate tracking, and operational visibility.
+- Keep secrets in `.env` and never commit production credentials
+- Restrict admin endpoints to trusted creator IDs only
+- Validate external data before writing to the database or spreadsheet
+- Use secure deployment configurations for production environments
 
-## Admin Capabilities
+## 🤝 Contribution
 
-The creator/admin panel includes functions such as:
-
-- `/admin` — display the admin panel
-- `/stats` — view platform statistics
-- `/give_sub <user_tg_id>` — grant subscription access
-- `/add_balance <user_tg_id> <amount>` — adjust user balance
-- `/ban <user_tg_id>` — restrict access
-- `/broadcast <message>` — notify all users
-
-## Security Notes
-
-- Use `.env` for local credentials and secrets.
-- Avoid committing production-level tokens or Google service credentials.
-- Restrict admin commands to trusted users only.
-- Validate all user input before persisting or executing actions.
-
-## Contribution
-
-Contributions are welcome. To contribute:
+Contributions are welcome. To propose a change:
 
 ```bash
 git checkout -b feature/your-feature
@@ -219,16 +238,12 @@ git commit -m "Add your feature"
 git push origin feature/your-feature
 ```
 
-Then open a pull request with a clear summary of what was changed.
+Then open a pull request and describe the improvement clearly.
 
-## License
+## 📞 Contact
 
-This project is currently distributed without a formal license declaration. If you plan to publish or reuse it commercially, add a license file and define the terms clearly.
-
-## Contact
-
-For inquiries or project collaboration, contact the repository maintainer via GitHub.
+For project questions, collaboration, or production deployment support, reach out through the repository owner or maintainer on GitHub.
 
 ---
 
-Built for recruitment automation in Telegram.
+Built for modern HR operations in Telegram.
